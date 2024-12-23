@@ -1,0 +1,384 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LiveTransMeet | Meetings</title>
+    <link rel="icon" href="{% static 'icon.png' %}" type="image/x-icon">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins');
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins',sans-serif ;
+        }
+        body{
+            min-height: 100vh;
+            width: 100%;
+            background: #009579;
+        }
+        #root {
+            position:fixed;
+            width: 100vw;
+            height: 85vh; /* Adjusting height to account for the header */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 60px; /* Adding margin to avoid overlap with the fixed header */
+        }
+
+        /* Styling for the circular button */
+        .circle-button {
+            position: fixed;
+            bottom: 5px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #28a745; /* Initial background color */
+            color: white;
+            border: 4px solid white; /* Initial border color set to white */
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease; /* Smooth transition for all properties */
+        }
+
+        .circle-button:hover {
+            background-color: #218838; /* Change background to a darker green */
+            border-color: transparent; /* Set border to transparent so the gradient appears */
+            background-image: linear-gradient(45deg, #ff6f00, #28a745); /* Gradient background on hover */
+            border-image: linear-gradient(45deg, #ff6f00, #28a745) 1; /* Apply gradient border */
+            transform: rotate(360deg); /* Rotate the button */
+        }
+
+        /* Icons for the button */
+        .icon {
+            font-size: 24px;
+        }
+
+        .blackboard-icon::before {
+            content: '\1F4DA'; /* Unicode for a book icon resembling blackboard */
+        }
+
+        .close-icon::before {
+            content: '\2715'; /* Unicode for a cross icon */
+        }
+
+        /* Styling for the new dropdown and button */
+        .translation-container {
+            position: fixed;
+            bottom:0px;
+            left: 0;
+            width: 100%;
+            background: #009579;/* Same gradient as the body */
+            display: grid;
+            grid-template-columns: auto auto;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+        }
+
+        .language-dropdown {
+            padding: 5px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .translate-button {
+            padding: 8px 12px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .translate-button:hover {
+            background-color: #0056b3;
+        }
+        .custom-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 5px 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 99;
+        }
+
+        .logo {
+            font-size: 2em;
+            color: #fff;
+            user-select: none;
+        }
+
+        .navigation a {
+            position: relative;
+            font-size: 1.1em;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 40px;
+        }
+
+        .navigation a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 3px;
+            background: #fff;
+            border-radius: 5px;
+            transform-origin: right;
+            transform: scaleX(0);
+            transition: transform .5s;
+        }
+
+        .navigation a:hover::after {
+
+            transform: scaleX(1);
+        }
+
+        .navigation .btnLogin-popup {
+            width: 130px;
+            height: 50px;
+            background: transparent;
+            border: 2px solid #fff;
+            outline: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1em;
+            color: #fff;
+            font-weight: 500;
+            margin-left: 40px;
+            transition: .5s;
+        }
+
+        .navigation .btnLogin-popup:hover {
+            background: #fff;
+            color: #162938;
+        }
+        
+
+        /* Heading styling */
+        h1 {
+            text-align: center;
+            color: red;
+            font-size: 10px;
+            margin: 10px 0;
+        }
+        footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 10px 20px;
+        position: fixed;
+        bottom:0;
+        width: 100%;
+        font-size: 14px;
+        }
+
+        footer a {
+        color: #4caf50;
+        text-decoration: none;
+        }
+
+        footer a:hover{
+        text-decoration: underline;
+        }
+        footer img{
+        vertical-align: middle;
+        margin-right: 5px;
+        margin-left: 5px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div>
+        <header class="custom-header">
+          <h2 class="logo">LiveTransMeet</h2>
+          <nav class="navigation">
+              <a href="#">Home</a>
+              <a href="#">About</a>
+              <a href="#">Sevices</a>
+              <a href="#">contact</a>
+          </nav>
+        </header>
+    </div>
+    <div id="root"></div>
+
+    <!-- New division for language dropdown and translate button -->
+    <div class="translation-container">
+        <select class="language-dropdown" id="languageDropdown">
+            <option value="select your language">Select your language</option>
+            <option value="eng">English</option>
+            <option value="arb">Arabic</option>
+            <option value="ben">Bengali</option>
+            <option value="cat">Catalan</option>
+            <option value="ces">Czech</option>
+            <option value="cmn">Chinese</option>
+            <option value="cym">Welsh</option>
+            <option value="dan">Danish</option>
+            <option value="deu">German</option>
+            <option value="est">Estonian</option>
+            <option value="fin">Finnish</option>
+            <option value="fra">French</option>
+            <option value="hin">Hindi</option>
+            <option value="ind">Indonesian</option>
+            <option value="ita">Italian</option>
+            <option value="jpn">Japanese</option>
+            <option value="kor">Korean</option>
+            <option value="mlt">Maltese</option>
+            <option value="nld">Dutch</option>
+            <option value="pes">Persian</option>
+            <option value="pol">Polish</option>
+            <option value="por">Portuguese</option>
+            <option value="ron">Romanian</option>
+            <option value="rus">Russian</option>
+            <option value="slk">Slovak</option>
+            <option value="spa">Spanish</option>
+            <option value="swe">Swedish</option>
+            <option value="swh">Swahili</option>
+            <option value="tel">Telugu</option>
+            <option value="tgl">Tagalog</option>
+            <option value="tha">Thai</option>
+            <option value="tur">Turkish</option>
+            <option value="ukr">Ukrainian</option>
+            <option value="urd">Urdu</option>
+            <option value="uzn">Uzbek</option>
+            <option value="vie">Vietnamese</option>
+        </select>
+        <button class="translate-button" title="When you click on translate button you will be redirected to another website. Target language select on redirected website must be same as language option you have selected in drop down menu." onclick="openTranslationPage()">Translate</button>
+
+        <!-- Circular button to run canvas-->
+        <button class="circle-button" title="Click here to open virtual blackboard.Before clicking on this button ensure that camera is not accessed by other programs. Please also turn off meeting vedio." onclick="startDrawing()">
+            <span id="button-icon" class="icon blackboard-icon"></span>
+        </button>
+        
+    </div>
+    <!--<footer>
+        <div>
+          <p>© 2024 LiveTransMeet. All right reserved. Developed by <a href="https://www.linkedin.com/in/aditya-manwatkar-46a187258/" target="_blank" rel= "noopener noreferrer" title="Visit My LinkedIn Profile"><img src="{% static 'image.png' %}" alt="LinkedIn" style="width: 24px; height: 24px;">Aditya Manwatkar</a>. </p>
+        </div>
+      </footer>-->
+
+    <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+    <script>
+        window.onload = function () {
+                function getUrlParams(url) {
+                let urlStr = url.split('?')[1];
+                const urlSearchParams = new URLSearchParams(urlStr);
+                const result = Object.fromEntries(urlSearchParams.entries());
+                return result;
+            }
+
+
+            // Generate a Token by calling a method.
+            // @param 1: appID
+            // @param 2: serverSecret
+            // @param 3: Room ID
+            // @param 4: User ID
+            // @param 5: Username
+            const roomID = getUrlParams(window.location.href)['roomID'] || (Math.floor(Math.random() * 10000) + "");
+            const userID = Math.floor(Math.random() * 10000) + "";
+            const userName = "{{ name }}"
+            const appID = 1589614211; //change this
+            const serverSecret = "bc76bff68d98f71c2ad1a38c282fe47d"; // change this
+            const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
+
+        
+            const zp = ZegoUIKitPrebuilt.create(kitToken);
+            zp.joinRoom({
+                container: document.querySelector("#root"),
+                sharedLinks: [{
+                    name: 'Personal link',
+                    url: window.location.protocol + '//' + window.location.host  + window.location.pathname + '?roomID=' + roomID,
+                }],
+                scenario: {
+                    mode: ZegoUIKitPrebuilt.VideoConference,
+                },
+                    
+                turnOnMicrophoneWhenJoining: false,
+                turnOnCameraWhenJoining: false,
+                showMyCameraToggleButton: true,
+                showMyMicrophoneToggleButton: true,
+                showAudioVideoSettingsButton: true,
+                showScreenSharingButton: true,
+                showTextChat: true,
+                showUserList: true,
+                maxUsers: 50,
+                layout: "Grid",
+                showLayoutButton: true,
+            
+            });
+        }
+        function openTranslationPage() {
+            const selectedLanguage = document.getElementById('languageDropdown').value;
+            const translateUrl = "https://huggingface.co/spaces/facebook/seamless-streaming";
+            window.open(translateUrl, '_blank');
+        }
+
+        // Function to toggle gesture.html
+        /*let gestureWindow = null;
+        function toggleGesturePage() {
+            const buttonIcon = document.getElementById('button-icon');
+
+            if (!gestureWindow || gestureWindow.closed) {
+                // Open gesture.html
+                gestureWindow = window.open('gesture.html', '_blank', 'width=800,height=600');
+                buttonIcon.classList.remove('blackboard-icon');
+                buttonIcon.classList.add('close-icon');
+            } else {
+                // Close gesture.html
+                gestureWindow.close();
+                gestureWindow = null;
+                buttonIcon.classList.remove('close-icon');
+                buttonIcon.classList.add('blackboard-icon');
+            }
+        }
+
+        // Periodic check to handle external closure of gesture.html
+        setInterval(() => {
+            const buttonIcon = document.getElementById('button-icon');
+            if (gestureWindow && gestureWindow.closed) {
+                buttonIcon.classList.remove('close-icon');
+                buttonIcon.classList.add('blackboard-icon');
+                gestureWindow = null;
+            }
+        }, 1000);*/
+
+        function startDrawing() {
+            fetch("/start_drawing/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) alert(data.message);
+            })
+            .catch(error => console.error("Error:", error));
+        }
+
+    </script>
+</body>
+
+</html>

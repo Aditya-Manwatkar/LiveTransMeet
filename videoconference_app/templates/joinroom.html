@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<!---Coding By CoderGirl | www.codinglabweb.com--->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" href="{% static 'icon.png' %}" type="image/x-icon">
+  <title>LiveTransMeet | Meetings</title>
+  <!--<title>Login & Registration Form | CoderGirl</title>-->
+  <!---Custom CSS File--->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+  <style>
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px 20px;
+      position: fixed;
+      bottom:0;
+      width: 100%;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #4caf50;
+      text-decoration: none;
+    }
+
+    footer a:hover{
+      text-decoration: underline;
+    }
+    footer img{
+      vertical-align: middle;
+      margin-right: 5px;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header class="custom-header">
+    <h2 class="logo">LiveTransMeet</h2>
+     <nav class="navigation">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Sevices</a>
+        <a href="#">contact</a>
+     </nav>
+</header>
+  <div class="container">
+    <div class="login form">
+      <header>Join Room</header>
+      <form action="{% url 'join_room' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" placeholder="Enter room ID" name="roomID">
+        <input type="submit" class="button" value="Join">
+        <center>
+          {% if success %}
+          <p style="color: green;"><b>{{ success }}</b></p>
+          {% endif %}
+          {% if error %}
+          <p style="color: red;">{{ error }}</p>
+          {% endif %}
+        </center>
+      </form>
+    </div>
+  </div>
+  <footer>
+    <div>
+      <p>© 2024 LiveTransMeet. All right reserved. Developed by <a href="https://www.linkedin.com/in/aditya-manwatkar-46a187258/" target="_blank" rel= "noopener noreferrer" title="Visit My LinkedIn Profile"><img src="{% static 'image.png' %}" alt="LinkedIn" style="width: 24px; height: 24px;">Aditya Manwatkar</a>. </p>
+    </div>
+  </footer>
+</body>
+</html>
