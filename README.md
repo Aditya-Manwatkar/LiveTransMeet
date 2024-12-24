@@ -37,7 +37,7 @@ LiveTransMeet is an innovative virtual meeting application that provides live mu
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/LiveTransMeet.git
+   git clone https://github.com/Aditya-Manwatkar/LiveTransMeet.git
    cd LiveTransMeet
    ```
 
@@ -91,12 +91,12 @@ We welcome contributions from the community! To contribute:
 This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgments
-
+We would like to express our deepest gratitude to the following contributors and organizations who made this project possible:
 - **Meta AI:** For the seamless streaming pretrained model.
 - **Zegocloud:** For providing WebRTC capabilities.
 - **Hugging Face:** For cloud hosting services.
 - **Open Source Libraries:** Special thanks to the contributors of Mediapipe, OpenCV, NumPy, and Django.
-
+Your support and contributions have been instrumental in bringing LiveTransMeet to life. Thank you!
 ---
 
 Start collaborating globally with LiveTransMeet today! 🌍
