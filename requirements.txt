@@ -1,5 +1,5 @@
-Django==4.2.5  # Adjust the version to match your setup
-numpy==1.24.4  # Adjust the version if required
-opencv-python==4.8.0.74  # Adjust the version if required
-mediapipe==0.9.9  # Ensure compatibility with your Python version
-cvzone==1.5.6  # Adjust based on the module in use
+Django
+numpy
+opencv-python
+mediapipe
+cvzone
