@@ -1,4 +1,4 @@
-# LiveTransMeet: A virtual meeting application with real time speech to speech translation and virtual blackboard
+# LiveTransMeet: A virtual meeting application with Multilingual Real-time speech-to-speech translation and virtual blackboard
 
 LiveTransMeet is an innovative virtual meeting application that provides live multilingual speech-to-speech translation and a Virtual Blackboard feature, enabling seamless communication and collaboration across languages and geographies.
 
