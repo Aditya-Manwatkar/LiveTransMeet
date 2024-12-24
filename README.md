@@ -76,7 +76,7 @@ LiveTransMeet is an innovative virtual meeting application that provides live mu
 
 ## Virtual Blackboard Workflow
 
-![Virtual Blackboard Workflow](assets/virtual-blackboard-workflow.png)
+![Virtual Blackboard Workflow](assets/air-canvas-flowchart.png)
 
 ## Contributing
 
